@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Categoria;
+use Faker\Factory as FakerFactory;
+use Faker\Generator as FakerGenerator;
+use WW\Faker\Provider\Picture;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -11,7 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(FakerGenerator::class, function () {
+            $faker = FakerFactory::create();
+            $faker->addProvider(new Picture($faker)); // Adiciona o provedor personalizado
+            return $faker;
+        });
     }
 
     /**

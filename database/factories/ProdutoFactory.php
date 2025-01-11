@@ -23,7 +23,7 @@ class ProdutoFactory extends Factory
             'descricao'=>$this->faker->paragraph(),
             'preco'=>$this->faker->randomNumber(2),
             'slug'=>Str::slug($nome),
-            'imagem'=>$this->faker->imageUrl(400,400),
+            'imagem' => $this->faker->pictureUrl(400, 400) . '?unique=' . $this->faker->uuid,
             'id_user'=> User::pluck('id')->random(),
             'id_categoria'=>Categoria::pluck('id')->random(),
         ];
